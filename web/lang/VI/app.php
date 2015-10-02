@@ -1,0 +1,27 @@
+<?php 
+return [ 
+'P0001'=>'Tên',
+'P0002'=>'Nghề nghiệp',
+'P0003'=>'Giới tính',
+'P0004'=>'Tuổi',
+'P0005'=>'Muốn biết tôi là ai thì bấm cái nút phía dưới.',
+'P0006'=>'Đây là trang của tôi',
+'P0007'=>'Tìm hiểu thêm',
+'P0008'=>'Trang chủ',
+'P0009'=>'Thông tin',
+'P0010'=>'Giới thiệu',
+'P0011'=>'Sản phẩm',
+'P0012'=>'Liên hệ',
+'P0013'=>'Đây là thứ nói về bản thân tôi',
+'P0014'=>'Bắt đầu tìm hiểu',
+'P0015'=>'Xem các sản phẩm',
+'P0016'=>'Liên hệ với tôi',
+'P0017'=>'Thông tin của tôi đây.Nếu bạn muốn thuê tôi xin hãy liên lạc .',
+'P0018'=>'Tải hồ sơ cá nhân của tôi',
+'P0019'=>'Nam',
+'P0020'=>'Nữ',
+'P0021'=>'tuổi',
+'P0022'=>'Lập trình viên',
+'P0023'=>'Nguyễn Chí Thắng',
+];
+?>

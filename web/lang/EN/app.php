@@ -1,0 +1,27 @@
+<?php 
+return [ 
+'P0001'=>'Name',
+'P0002'=>'Job',
+'P0003'=>'Sex',
+'P0004'=>'Age',
+'P0005'=>'Do you want to know who i am.Press button below!',
+'P0006'=>'THIS IS MY PAGE',
+'P0007'=>'Find out more',
+'P0008'=>'Homepage',
+'P0009'=>'About',
+'P0010'=>'Introduce',
+'P0011'=>'Project',
+'P0012'=>'Contact',
+'P0013'=>'This is my story !',
+'P0014'=>'Get Started!',
+'P0015'=>'See my project',
+'P0016'=>'Let contact me',
+'P0017'=>'My information is below there . So if you want to hire me , please contact',
+'P0018'=>'Download my CV',
+'P0019'=>'Male',
+'P0020'=>'Female',
+'P0021'=>'year old',
+'P0022'=>'Developer',
+'P0023'=>'Nguyen Chi Thang',
+];
+?>
