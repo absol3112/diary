@@ -5,11 +5,19 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use  yii\web\Response;
 
 class AbstractController extends \yii\web\Controller
 {
 	public function init(){
-		$languageInput = 'VI';
+        //khoi tao session
+        $session = Yii::$app->session;
+        if (isset($_GET['lang'])) {
+            $session->set('language', $_GET['lang']);
+        }
+        $languageInput = $session->get('language');
+        $languageInput = $session['language'];
+        $languageInput = isset($_SESSION['language']) ? $_SESSION['language'] : 'EN';        
         Yii::$app->language = $languageInput;
         $fileName = "lang/language.xlsx";
         $data = \moonland\phpexcel\Excel::import($fileName, [
@@ -23,7 +31,7 @@ class AbstractController extends \yii\web\Controller
                     unset($value[$keyOfValue]);
                 }
             }
-            $word[] = "'".implode("'=>'", $value)."',";
+            $word[] = '"'.implode('"=>"', $value).'",';
         }
         mkdir("lang/".$languageInput);
         $myfile = fopen("lang/".$languageInput."/app.php", "w");
@@ -35,5 +43,6 @@ class AbstractController extends \yii\web\Controller
         }
         fwrite($myfile, $txt);
         fclose($myfile);
+        
 	}
 }

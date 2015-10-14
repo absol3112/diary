@@ -6,10 +6,9 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
-use app\models\introduce;
-use app\models\project;
 use app\controllers\AbstractController;
+use app\models\Project;
+use app\models\ProjectType;
 
 class SiteController extends AbstractController
 {
@@ -33,6 +32,7 @@ class SiteController extends AbstractController
                     'logout' => ['post'],
                 ],
             ],
+            
         ];
     }
 
@@ -50,12 +50,9 @@ class SiteController extends AbstractController
     }
     public function actionIndex()
     {   
-        
-        $introduceModel = introduce::find()->all();
-        $projectModel = project::find()->all();
-        return $this->render('index', [
-            'introduceModel' => $introduceModel,
-            'projectModel' => $projectModel,
+        $projectResult = Project::find()->all();
+        return $this->render('index',[
+            'projectResult'=>$projectResult,
         ]);
     }
 

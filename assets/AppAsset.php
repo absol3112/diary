@@ -18,24 +18,13 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/creative.css',
-        'css/bootstrap.min.css',
-        'css/bootstrap.css',
-        'css/animate.min.css',
+        'bootstrap/css/bootstrap.min.css',
+        'css/font-awesome.min.css',
+        'css/simple-line-icons.css',
+        'css/animate.css',
     ];
     public $js = [
-        'bootstrap.js',
-        'bootstrap.min.js',
-        'cbpAnimatedHeader.js',
-        'classie.js',
-        'jquery.easing.min.js',
-        'jquery.fittext.js',
-        'jquery.js',
-        'wow.min.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }
