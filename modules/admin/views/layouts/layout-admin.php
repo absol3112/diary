@@ -1,3 +1,12 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Bbs */
+/* @var $form yii\widgets\ActiveForm */
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +25,8 @@
 
     <!-- MetisMenu CSS -->
     <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
     <link href="dist/css/timeline.css" rel="stylesheet">
@@ -56,7 +67,7 @@
 </style>
 </head>
 
-<body>
+<body onload="init()">
 
     <div id="wrapper">
 
@@ -69,58 +80,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Management</a>
+                <a class="navbar-brand" href="admin/">Management</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw notification" data-badge="9"></i>  <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="messengerCount">
+                    <i class="fa fa-envelope fa-fw notification"></i><i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
+                    <ul class="dropdown-menu dropdown-messages" id="messengerDetail">
+                        
+                        
                     </ul>
                     <!-- /.dropdown-messages -->
                 </li>
@@ -273,6 +244,8 @@
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
+                        <li><a href=""><i class="fa fa-arrow-left fa-fw"></i>Back to Front-end</a>
+                        </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
@@ -298,10 +271,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="admin/top/index"><i class="fa fa-home fa-fw"></i>Top</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="tables.html"><i class="fa fa-envelope fa-fw"></i> Messenger</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Project<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="flot.html">Flot Charts</a>
@@ -312,9 +288,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                        </li>
+                        
                         <li>
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
@@ -394,7 +368,6 @@
         <?=$content?>
     </div>
     <!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -403,16 +376,58 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="bower_components/raphael/raphael-min.js"></script>
-    <script src="bower_components/morrisjs/morris.min.js"></script>
-    <script src="js/morris-data.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
     
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script src="js/pageLevel.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="bower_components/raphael/raphael-min.js"></script>
+    <script src="bower_components/morrisjs/morris.min.js"></script>
+    <script src="js/morris-data.js"></script>
+    <!-- <script src="js/ajax-messenger-count.js"></script> -->
+    <script type="text/javascript">
+        function init()
+        {
+            updateTime();
+            window.setInterval(updateTime,10000);
+        }
+        function updateTime()
+        {
+            var messengerCount;
 
+            $.ajax({                                      
+              url : '<?php echo Yii::$app->request->baseUrl.'/admin/ajax/messengercount' ?>',
+
+                    type : "get",
+                    dataType:"text",
+                    data : {
+                         
+                    },
+                    success : function (result){
+                         // alert(result);
+                        // messengerCount = result.val();
+                        $('#messengerCount').html(result);
+                    }
+            });
+            $.ajax({                                      
+              url : '<?php echo Yii::$app->request->baseUrl.'/admin/ajax/messengerdetail' ?>',
+
+                    type : "get",
+                    dataType:"text",
+                    data : {
+                         
+                    },
+                    success : function (result){
+                        $('#messengerDetail').html(result);
+                    }
+            });            
+        }   
+    </script>
 </body>
 
 </html>

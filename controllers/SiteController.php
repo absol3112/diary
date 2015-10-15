@@ -9,6 +9,7 @@ use app\models\LoginForm;
 use app\controllers\AbstractController;
 use app\models\Project;
 use app\models\ProjectType;
+use app\models\Messenger;
 
 class SiteController extends AbstractController
 {
@@ -50,8 +51,16 @@ class SiteController extends AbstractController
     }
     public function actionIndex()
     {   
+        $model = new Messenger();
         $projectResult = Project::find()->all();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->read_chk = 0;
+            $model->del_chk=0;
+            $model->date = date("Y/m/d H:i:s"); 
+            $model->save();
+        }
         return $this->render('index',[
+            'model'=>$model,
             'projectResult'=>$projectResult,
         ]);
     }

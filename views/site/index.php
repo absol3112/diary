@@ -1,4 +1,12 @@
+<?php
 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Bbs */
+/* @var $form yii\widgets\ActiveForm */
+?>
 
     <!-- Preloader -->
 
@@ -302,28 +310,23 @@
             <div class="row">
 
                 <div class="col-sm-6 col-sm-offset-3">
-
-                    <form id="contact-form" role="form">
-                        <div class="ajax-hidden">
+                    <?php $form = ActiveForm::begin(); ?>
+                    <div class="ajax-hidden">
                             <div class="form-group wow fadeInUp">
                                 <label class="sr-only" for="c_name"></label>
-                                <input type="text" id="c_name" class="form-control" name="c_name" placeholder="<?=Yii::t('app', 'P0036') ?>">
+                                <?= $form->field($model, 'name')->textInput(["id"=>"c_name", "class"=>"form-control","placeholder"=>Yii::t("app", "P0036")])->label(false) ?>
                             </div>
-
                             <div class="form-group wow fadeInUp" data-wow-delay=".1s">
                                 <label class="sr-only" for="c_email"></label>
-                                <input type="email" id="c_email" class="form-control" name="c_email" placeholder="<?=Yii::t('app', 'P0037') ?>">
+                                <?= $form->field($model, 'email')->textInput(["id"=>"c_name", "class"=>"form-control","placeholder"=>Yii::t("app", "P0037")])->label(false) ?>
                             </div>
 
                             <div class="form-group wow fadeInUp" data-wow-delay=".2s">
-                                <textarea class="form-control" id="c_message" name="c_message" rows="7" placeholder="<?=Yii::t('app', 'P0038') ?>"></textarea>
+                                <?= $form->field($model, 'detail')->textArea(["id"=>"c_message", "rows"=>"7","class"=>"form-control","placeholder"=>Yii::t("app", "P0038")])->label(false) ?>
                             </div>
-
-                            <button type="submit" class="btn btn-lg btn-block wow fadeInUp" data-wow-delay=".3s"><?=Yii::t('app', 'P0039') ?></button>
-                        </div>
-                        <div class="ajax-response"></div>
-                    </form>
-
+                            <?= Html::submitButton(Yii::t("app", "P0039"), ['class' => 'btn btn-lg btn-block wow fadeInUp',"data-wow-delay"=>".3s"]) ?>
+                            <div class="ajax-response"></div>
+                    <?php ActiveForm::end(); ?>
                 </div>
 
             </div><!-- .row -->

@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use  yii\web\Response;
+use app\models\Messenger;
 
 class AbstractController extends \yii\web\Controller
 {
@@ -43,6 +44,5 @@ class AbstractController extends \yii\web\Controller
         }
         fwrite($myfile, $txt);
         fclose($myfile);
-        
 	}
 }

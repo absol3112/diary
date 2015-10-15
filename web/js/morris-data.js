@@ -10,12 +10,12 @@ $(function() {
         }, {
             period: '2015-08-06',
             iphone: 3,
-            ipad: null,
+            ipad: 10,
             itouch: 4
         }, {
             period: '2015-08-07',
             iphone: 3,
-            ipad: 5,
+            ipad: 0,
             itouch: 5
         }, {
             period: '2015-08-08',
@@ -51,7 +51,8 @@ $(function() {
         data: [{
             y: '2006',
             a: 100,
-            b: 90
+            b: 90,
+            c: 60
         }, {
             y: '2007',
             a: 75,
@@ -59,27 +60,32 @@ $(function() {
         }, {
             y: '2008',
             a: 50,
-            b: 40
+            b: 40,
+            c: 60
         }, {
             y: '2009',
             a: 75,
-            b: 65
+            b: 65,
+            c: 60
         }, {
             y: '2010',
             a: 50,
-            b: 40
+            b: 40,
+            c: 60
         }, {
             y: '2011',
             a: 75,
-            b: 65
+            b: 65,
+            c: 60
         }, {
             y: '2012',
             a: 100,
-            b: 90
+            b: 90,
+            c: 60
         }],
         xkey: 'y',
-        ykeys: ['a', 'b'],
-        labels: ['Series A', 'Series B'],
+        ykeys: ['a', 'b' ,'c'],
+        labels: ['Series A', 'Series B','Series C'],
         hideHover: 'auto',
         resize: true
     });
