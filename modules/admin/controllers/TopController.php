@@ -9,7 +9,7 @@ class TopController extends AbstractController
     public function actionIndex()
     {
     	$messengerModel = Messenger::find();
-    	$messengerCount = $messengerModel->count();
+    	$messengerCount = $messengerModel->where(['read_chk'=>0])->count();
     	
         return $this->render('index',[
         	'messengerCount'=>$messengerCount,

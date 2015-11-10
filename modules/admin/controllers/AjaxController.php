@@ -10,18 +10,18 @@ class AjaxController extends \yii\web\Controller
 		$this->layout = '';
     	$messengerCount = Messenger::find()->where(['read_chk'=>'0'])->count();
     	if ($messengerCount==0) {
-    		echo '<i class="fa fa-envelope fa-fw notification"></i><i class="fa fa-caret-down"></i>';
+    		echo '<i class="fa fa-envelope fa-fw notification" id="messengerShow"></i><i class="fa fa-caret-down"></i>';
     	}elseif ($messengerCount<10){
-    		echo '<i class="fa fa-envelope fa-fw notification" data-badge="'.$messengerCount.'"></i><i class="fa fa-caret-down"></i>';
+    		echo '<i class="fa fa-envelope fa-fw notification" id="messengerShow" data-badge="'.$messengerCount.'"></i><i class="fa fa-caret-down"></i>';
     	}else{
-    		echo '<i class="fa fa-envelope fa-fw notification" data-badge="9+"></i><i class="fa fa-caret-down"></i>';
+    		echo '<i class="fa fa-envelope fa-fw notification" id="messengerShow" data-badge="9+"></i><i class="fa fa-caret-down"></i>';
     	}
 	}
 	public function actionMessengerdetail()
 	{
 		$this->layout = '';
-		$messengerCount = Messenger::find()->count();
-		$messengerModel = Messenger::find()->all();
+		$messengerCount = Messenger::find()->where(['read_chk'=>0])->count();
+		$messengerModel = Messenger::find()->limit(10)->orderBy(['date' => SORT_DESC])->all();
 		foreach ($messengerModel as $messengerModel) {
 			$time = strtotime("now")-strtotime($messengerModel->date);
 			if (($time<30)) {
@@ -36,12 +36,15 @@ class AjaxController extends \yii\web\Controller
 				$alert = "a hour ago";
 			}elseif(($time>=7200) && ($time <86400)){
 				$alert = floor($time/3600)." hours ago";
+			}elseif(($time>=86400) && ($time <172800)){
+				$alert = "yesterday";
 			}else{
 				$alert = $messengerModel->date;
 			}
 			//gioi han la so ban ghi show ra 
-				$echo[]= '<li>
-	                <a href="#">
+				if ($messengerModel->read_chk==0) {
+					$echo[]= '<li style="background:#c4cffd;">
+	                <a href="admin/messenger/detail?id='.$messengerModel->messenger_id.'">
 	                    <div>
 	                        <strong>'.$messengerModel->name.'</strong>
 	                        <span class="pull-right text-muted">
@@ -51,6 +54,20 @@ class AjaxController extends \yii\web\Controller
 	                    <div>'.$messengerModel->detail.'</div>
 	                </a>
 	            </li>';
+				}else{
+					$echo[]= '<li>
+	                <a href="admin/messenger/detail?id='.$messengerModel->messenger_id.'">
+	                    <div>
+	                        <strong>'.$messengerModel->name.'</strong>
+	                        <span class="pull-right text-muted">
+	                            <em>'.$alert.'</em>
+	                        </span>
+	                    </div>
+	                    <div>'.$messengerModel->detail.'</div>
+	                </a>
+	            </li>';
+				}
+				
 
 		}
 		if ($messengerCount<10) {
@@ -70,5 +87,15 @@ class AjaxController extends \yii\web\Controller
 				echo $echo;
 			}
 		}
+	}
+	public function actionMessengerisread()
+	{
+		$messengerRecord= messenger::find()->all();
+		foreach ($messengerRecord as $messengerRecord) {
+			$messengerRecord->read_chk=1;
+			$messengerRecord->save();
+		}
+		exit;
+
 	}
 }

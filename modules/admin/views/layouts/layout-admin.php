@@ -68,7 +68,9 @@ use yii\widgets\ActiveForm;
 </head>
 
 <body onload="init()">
-
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -87,7 +89,7 @@ use yii\widgets\ActiveForm;
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="messengerCount">
-                    <i class="fa fa-envelope fa-fw notification"></i><i class="fa fa-caret-down"></i>
+                    <i class="fa fa-envelope fa-fw notification" id='messengerShow'></i><i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages" id="messengerDetail">
                         
@@ -274,7 +276,7 @@ use yii\widgets\ActiveForm;
                             <a href="admin/top/index"><i class="fa fa-home fa-fw"></i>Top</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-envelope fa-fw"></i> Messenger</a>
+                            <a href="admin/messenger/list"><i class="fa fa-envelope fa-fw"></i> Messenger</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Project<span class="fa arrow"></span></a>
@@ -426,7 +428,27 @@ use yii\widgets\ActiveForm;
                         $('#messengerDetail').html(result);
                     }
             });            
-        }   
+        }
+        
+        $(".tableDetail").click(function() {
+            // alert($(this).data("href"));
+            window.document.location = $(this).data("href");
+        $('#messengerCount').click(function(){
+            $.ajax({                                      
+              url : '<?php echo Yii::$app->request->baseUrl.'/admin/ajax/messengerisread' ?>',
+
+                    type : "get",
+                    dataType:"text",
+                    data : {
+                         
+                    },
+                    success : function (result){
+                        $('#messengerDetail').html(result);
+                    }
+            });
+        });
+        });
+        
     </script>
 </body>
 

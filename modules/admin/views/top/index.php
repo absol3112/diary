@@ -22,7 +22,7 @@
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
+                                <span class="pull-left">View Lists</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -97,8 +97,13 @@
                 </div> -->
             </div>
             <!-- /.row -->
+            
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-list fa-fw"></i> danh sach 
+                        </div>
                     <div class="panel-body">
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -520,6 +525,7 @@
                         <!-- /.panel-body -->
                 </div>
             </div>
+            </div>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
@@ -551,14 +557,6 @@
                             <div id="morris-area-chart"></div>
                         </div>
                         <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            DataTables Advanced Tables
-                        </div>
-                        <!-- /.panel-heading -->
-                        
                     </div>
                     <!-- /.panel -->
                     <div class="panel panel-default">
